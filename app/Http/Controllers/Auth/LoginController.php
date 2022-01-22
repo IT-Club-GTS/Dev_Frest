@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -41,12 +43,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // public function login(Request $request)
-    // {
-    //     if(Auth::attempt(['email'=>$request['email'], 'password'=>$request['password']])){
-    //         return $this->redirectTo;
-    //     }
+    public function callbackGoogle()
+    {
+        $user = Socialite::driver('google')->user();
+        dd($user);
+        return redirect()->route('home');
+    }
 
-    //     return back()->withErrors(['login'=>'Email or passwor not correct'])->withInput();
-    // }
+    public function redirectToGoogle()
+    {
+        $parameters = [
+            "access_type" => "offline",
+            "prompt" => "consent select_account"
+        ];
+        return Socialite::driver('google')->with($parameters)->redirect();
+    }
 }

@@ -16,7 +16,13 @@ use Illuminate\Support\Facades\Auth;
 */
 // route auth
 Auth::routes();
-Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+//route login third part
+Route::group(['prefix' => 'auth/'], function () {
+    Route::get('/google/login',[LoginController::class,'redirectToGoogle'])->name('google.login');
+    Route::get('google/callback', [LoginController::class, 'callbackGoogle']);
+});
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

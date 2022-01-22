@@ -1,0 +1,13 @@
+Download and extract for cacert.pem here (a clean file format/data)
+
+https://curl.haxx.se/docs/caextract.html
+
+Put it in :
+
+C:\xampp\php\extras\ssl\cacert.pem
+
+Add this line to your php.ini
+
+curl.cainfo = "C:\xampp\php\extras\ssl\cacert.pem"
+
+restart your webserver/Apache
