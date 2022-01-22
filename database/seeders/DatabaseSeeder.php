@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::insert(
             [
                 [
-                    "name" => "admin",
-                    "email" => "admin@gmail.com",
-                    "password" => bcrypt('admin'),
+                    "name" => env('ADMIN_SITE_NAME'),
+                    "email" => env('ADMIN_SITE_EMAIL'),
+                    "password" => bcrypt(env('ADMIN_SITE_PASSWORD')),
                 ],
                 [
-                    "name" => "user",
-                    "email" => "user@gmail.com",
-                    "password" => bcrypt('user'),
+                    "name" => env('USER_SITE_NAME'),
+                    "email" => env('USER_SITE_EMAIL'),
+                    "password" => bcrypt(env('USER_SITE_PASSWORD')),
                 ]
             ]
         );
